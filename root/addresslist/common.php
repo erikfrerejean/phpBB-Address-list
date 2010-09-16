@@ -43,8 +43,7 @@ if (!defined('IN_ADL_INSTALL') && (empty(adl_phpbb::$config['adl_version']) || v
 	// No founder throw an error
 	if (adl_phpbb::$user->data['user_type'] != USER_FOUNDER)
 	{
-		adl_phpbb::$user->set_custom_lang_path(ADL_ROOT_PATH . 'language/');
-		adl_phpbb::$user->add_lang('common');
+		addresslist::add_lang('common');
 
 		trigger_error(adl_phpbb::$user->lang('ADL_DISABLED'), E_USER_ERROR);
 	}

@@ -20,9 +20,7 @@ if (!defined('ADL_ROOT_PATH')) define('ADL_ROOT_PATH', './');	// /me === lazy
 require ADL_ROOT_PATH . 'common.' . PHP_EXT;
 
 // Include ADL install language file
-adl_phpbb::$user->set_custom_lang_path(ADL_ROOT_PATH . 'language/');
-adl_phpbb::$user->add_lang('install');
-adl_phpbb::$user->set_custom_lang_path(PHPBB_ROOT_PATH . 'language/');
+addresslist::add_lang('install');
 
 // Check UMIL
 if (!file_exists(PHPBB_ROOT_PATH . 'umil/umil_auto.' . PHP_EXT))
