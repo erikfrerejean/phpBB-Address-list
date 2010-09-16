@@ -22,6 +22,11 @@ if (!defined('IN_PHPBB'))
 abstract class addresslist
 {
 	/**
+	 * @var string The absolute path to phpBB
+	 */
+	static public $absolute = '';
+
+	/**
 	 * Initialise phpBB Address List
 	 *
 	 * @return void
@@ -30,6 +35,13 @@ abstract class addresslist
 	{
 		// Set the template path
 		adl_phpbb::$template->set_custom_template(ADL_ROOT_PATH . 'styles/' . adl_phpbb::$user->theme['theme_name'], 'phpBBAddressList', ADL_ROOT_PATH . 'styles/prosilver/template/');
+		adl_phpbb::$user->theme['template_storedb'] = false;
+
+		// Set the absolute path, this is a bit nasty but it allows users to
+		// rename the addresslist directory.
+		$_dir_parts = explode('/', __DIR__);
+		$_dir = $_dir_parts[sizeof($_dir_parts) - 3]; // It's *always* three down
+		self::$absolute = generate_board_url(true) . adl_phpbb::$config['script_path'] . '/' . $_dir . '/';
 	}
 
 	/**
@@ -138,5 +150,16 @@ abstract class addresslist
 
 		// Call phpBB's header first it does some stuff we need ;)
 		adl_phpbb::page_header($page_title);
+
+		// Assign more template vars
+		adl_phpbb::$template->assign_vars(array(
+			'T_ADL_THEME_PATH'			=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['theme_path'] . '/theme',
+			'T_ADL_TEMPLATE_PATH'		=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_path'] . '/template',
+			'T_ADL_SUPER_TEMPLATE_PATH'	=> (isset(adl_phpbb::$user->theme['template_inherit_path']) && adl_phpbb::$user->theme['template_inherit_path']) ? self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_inherit_path'] . '/template' : self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_path'] . '/template',
+			'T_ADL_IMAGESET_PATH'		=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['imageset_path'] . '/imageset',
+			'T_ADL_IMAGESET_LANG_PATH'	=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['imageset_path'] . '/imageset/' . adl_phpbb::$user->data['user_lang'],
+			'T_STYLESHEET_LINK'			=> (!adl_phpbb::$user->theme['theme_storedb']) ? self::$absolute . 'styles/' . adl_phpbb::$user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid(PHPBB_ROOT_PATH . 'style.' . PHP_EXT, 'id=' . adl_phpbb::$user->theme['style_id'] . '&amp;lang=' . adl_phpbb::$user->data['user_lang']),
+			'T_ADL_STYLESHEET_NAME'		=> adl_phpbb::$user->theme['theme_name'],
+		));
 	}
 }
