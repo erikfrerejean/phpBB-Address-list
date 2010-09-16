@@ -29,7 +29,7 @@ abstract class addresslist
 	static public function initialise()
 	{
 		// Set the template path
-		adl_phpbb::$template->set_custom_template(ADL_ROOT_PATH . 'styles/', adl_phpbb::$user->theme['theme_name'], ADL_ROOT_PATH . 'styles/prosilver/template/');
+		adl_phpbb::$template->set_custom_template(ADL_ROOT_PATH . 'styles/' . adl_phpbb::$user->theme['theme_name'], 'phpBBAddressList', ADL_ROOT_PATH . 'styles/prosilver/template/');
 	}
 
 	/**
