@@ -25,7 +25,7 @@ require ADL_ROOT_PATH . 'includes/constants.' . PHP_EXT;
 
 // Include the main core classes
 require ADL_ROOT_PATH . 'includes/core/addresslist.' . PHP_EXT;
-require ADL_ROOT_PATH . 'includes/core/phpbb.' . PHP_EXT;
+require ADL_ROOT_PATH . 'includes/core/adl_phpbb.' . PHP_EXT;
 
 // Include common phpBB files and functions.
 if (!file_exists(PHPBB_ROOT_PATH . 'common.' . PHP_EXT))
