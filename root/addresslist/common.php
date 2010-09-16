@@ -24,6 +24,7 @@ $phpEx = PHP_EXT;
 require ADL_ROOT_PATH . 'includes/constants.' . PHP_EXT;
 
 // Include the main core classes
+require ADL_ROOT_PATH . 'includes/core/addresslist.' . PHP_EXT;
 require ADL_ROOT_PATH . 'includes/core/phpbb.' . PHP_EXT;
 
 // Include common phpBB files and functions.
@@ -51,3 +52,6 @@ if (!defined('IN_ADL_INSTALL') && (empty(adl_phpbb::$config['adl_version']) || v
 	// Redirect to the installer
 	redirect(append_sid(ADL_ROOT_PATH . 'install.' . PHP_EXT));
 }
+
+// Initialise the core
+addresslist::initialise();
