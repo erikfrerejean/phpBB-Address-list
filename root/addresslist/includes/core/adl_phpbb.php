@@ -24,6 +24,11 @@ if (!defined('IN_PHPBB'))
 abstract class adl_phpbb
 {
 	/**
+	 * @var string The absolute path to phpBB
+	 */
+	static public $absolute = '';
+
+	/**
 	 * @var auth phpBB Auth class
 	 */
 	static public $auth = null;
@@ -73,6 +78,8 @@ abstract class adl_phpbb
 		self::$user->session_begin();
 		self::$auth->acl(self::$user->data);
 		self::$user->setup();
+
+		self::$absolute = generate_board_url(true) . self::$config['script_path'];
 	}
 
 	/**
@@ -180,10 +187,6 @@ abstract class adl_phpbb
 		// Last visit date/time
 		$s_last_visit = (self::$user->data['user_id'] != ANONYMOUS) ? self::$user->format_date(self::$user->data['session_last_visit']) : '';
 
-		// Determine board url - we may need it later
-		$board_url = generate_board_url() . '/';
-		$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : PHPBB_ROOT_PATH;
-
 		// Which timezone?
 		$tz = (self::$user->data['user_id'] != ANONYMOUS) ? strval(doubleval(self::$user->data['user_timezone'])) : strval(doubleval(self::$config['board_timezone']));
 
@@ -199,12 +202,12 @@ abstract class adl_phpbb
 			'SITENAME'						=> self::$config['sitename'],
 			'SITE_DESCRIPTION'				=> self::$config['site_desc'],
 			'PAGE_TITLE'					=> $page_title,
+			'SCRIPT_NAME'					=> str_replace('.' . PHP_EXT, '', self::$user->page['page_name']),
 			'LAST_VISIT_DATE'				=> sprintf(self::$user->lang['YOU_LAST_VISIT'], $s_last_visit),
 			'LAST_VISIT_YOU'				=> $s_last_visit,
 			'CURRENT_TIME'					=> sprintf(self::$user->lang['CURRENT_TIME'], self::$user->format_date(time(), false, true)),
 
-			'ROOT_PATH'			=> PHPBB_ROOT_PATH,
-			'BOARD_URL'			=> $board_url,
+			'SESSION_ID'		=> self::$user->session_id,
 
 			'U_INDEX'				=> append_sid(PHPBB_ROOT_PATH . 'index.' . PHP_EXT),
 			'U_DELETE_COOKIES'		=> append_sid(PHPBB_ROOT_PATH . 'ucp.' . PHP_EXT, 'mode=delete_cookies'),
@@ -225,14 +228,6 @@ abstract class adl_phpbb
 
 			'S_LOGIN_ACTION'		=> ((!defined('ADMIN_START')) ? append_sid(PHPBB_ROOT_PATH . 'ucp.' . PHP_EXT, 'mode=login') : append_sid('index.' . PHP_EXT, false, true, self::$user->session_id)),
 			'S_LOGIN_REDIRECT'		=> build_hidden_fields(array('redirect' => build_url())),
-
-			'T_THEME_PATH'			=> $web_path . 'styles/' . self::$user->theme['theme_path'] . '/theme',
-			'T_TEMPLATE_PATH'		=> $web_path . 'styles/' . self::$user->theme['template_path'] . '/template',
-			'T_SUPER_TEMPLATE_PATH'	=> (isset(self::$user->theme['template_inherit_path']) && self::$user->theme['template_inherit_path']) ? "{$web_path}styles/" . self::$user->theme['template_inherit_path'] . '/template' : "{$web_path}styles/" . self::$user->theme['template_path'] . '/template',
-			'T_IMAGESET_PATH'		=> $web_path . 'styles/' . self::$user->theme['imageset_path'] . '/imageset',
-			'T_IMAGESET_LANG_PATH'	=> $web_path . 'styles/' . self::$user->theme['imageset_path'] . '/imageset/' . self::$user->data['user_lang'],
-			'T_STYLESHEET_LINK'		=> (!self::$user->theme['theme_storedb']) ? "{$web_path}styles/" . self::$user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid(PHPBB_ROOT_PATH . 'style.' . PHP_EXT, 'id=' . self::$user->theme['style_id'] . '&amp;lang=' . self::$user->data['user_lang']),
-			'T_STYLESHEET_NAME'		=> self::$user->theme['theme_name'],
 
 			'T_THEME_NAME'			=> self::$user->theme['theme_path'],
 			'T_TEMPLATE_NAME'		=> self::$user->theme['template_path'],
