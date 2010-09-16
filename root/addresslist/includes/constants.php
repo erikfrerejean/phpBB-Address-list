@@ -15,3 +15,6 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+
+// The version
+define ('ADL_VERSION', '0.0.1');
