@@ -153,13 +153,13 @@ abstract class addresslist
 
 		// Assign more template vars
 		adl_phpbb::$template->assign_vars(array(
-			'T_THEME_PATH'			=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['theme_path'] . '/theme',
-			'T_TEMPLATE_PATH'		=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_path'] . '/template',
-			'T_SUPER_TEMPLATE_PATH'	=> (isset(adl_phpbb::$user->theme['template_inherit_path']) && adl_phpbb::$user->theme['template_inherit_path']) ? self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_inherit_path'] . '/template' : self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_path'] . '/template',
-			'T_IMAGESET_PATH'		=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['imageset_path'] . '/imageset',
-			'T_IMAGESET_LANG_PATH'	=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['imageset_path'] . '/imageset/' . adl_phpbb::$user->data['user_lang'],
-			'T_STYLESHEET_LINK'		=> (!adl_phpbb::$user->theme['theme_storedb']) ? self::$absolute . 'styles/' . adl_phpbb::$user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid(PHPBB_ROOT_PATH . 'style.' . PHP_EXT, 'id=' . adl_phpbb::$user->theme['style_id'] . '&amp;lang=' . adl_phpbb::$user->data['user_lang']),
-			'T_STYLESHEET_NAME'		=> adl_phpbb::$user->theme['theme_name'],
+			'T_ADL_THEME_PATH'			=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['theme_path'] . '/theme',
+			'T_ADL_TEMPLATE_PATH'		=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_path'] . '/template',
+			'T_ADL_SUPER_TEMPLATE_PATH'	=> (isset(adl_phpbb::$user->theme['template_inherit_path']) && adl_phpbb::$user->theme['template_inherit_path']) ? self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_inherit_path'] . '/template' : self::$absolute . 'styles/' . adl_phpbb::$user->theme['template_path'] . '/template',
+			'T_ADL_IMAGESET_PATH'		=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['imageset_path'] . '/imageset',
+			'T_ADL_IMAGESET_LANG_PATH'	=> self::$absolute . 'styles/' . adl_phpbb::$user->theme['imageset_path'] . '/imageset/' . adl_phpbb::$user->data['user_lang'],
+			'T_STYLESHEET_LINK'			=> (!adl_phpbb::$user->theme['theme_storedb']) ? self::$absolute . 'styles/' . adl_phpbb::$user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid(PHPBB_ROOT_PATH . 'style.' . PHP_EXT, 'id=' . adl_phpbb::$user->theme['style_id'] . '&amp;lang=' . adl_phpbb::$user->data['user_lang']),
+			'T_ADL_STYLESHEET_NAME'		=> adl_phpbb::$user->theme['theme_name'],
 		));
 	}
 }
