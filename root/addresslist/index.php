@@ -14,5 +14,5 @@
 define('IN_PHPBB', true);
 if (!defined('PHPBB_ROOT_PATH')) define('PHPBB_ROOT_PATH', './../');
 if (!defined('PHP_EXT')) define('PHP_EXT', substr(strchr(__FILE__, '.'), 1));
-if (!defined('ADDRESS_ROOT_PATH')) define('ADDRESS_ROOT_PATH', './');	// /me === lazy
-require ADDRESS_ROOT_PATH . 'common.' . PHP_EXT;
+if (!defined('ADL_ROOT_PATH')) define('ADL_ROOT_PATH', './');	// /me === lazy
+require ADL_ROOT_PATH . 'common.' . PHP_EXT;
