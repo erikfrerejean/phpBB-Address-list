@@ -24,7 +24,7 @@ $phpEx = PHP_EXT;
 require ADDRESS_ROOT_PATH . 'includes/constants.' . PHP_EXT;
 
 // Include the main core classes
-require ADDRESS_ROOT_PATH . 'includes/phpbb.' . PHP_EXT;
+require ADDRESS_ROOT_PATH . 'includes/core/phpbb.' . PHP_EXT;
 
 // Include common phpBB files and functions.
 if (!file_exists(PHPBB_ROOT_PATH . 'common.' . PHP_EXT))
