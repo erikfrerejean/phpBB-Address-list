@@ -21,13 +21,14 @@ require ADL_ROOT_PATH . 'common.' . PHP_EXT;
 $page = request_var('page', '');
 
 // Display teh left page
-$page_tpl = '';
+$page_handler = null;
 switch ($page)
 {
 	// Create the main page
 	default :
-		$page_title = 'ADDRESS_LIST_MAIN';
+		require ADL_ROOT_PATH . 'includes/pages/adl_main.' . PHP_EXT;
+		$page_handler = new adl_main();
 }
 
 // Display
-addresslist::display($page_title, $page_tpl);
+$page_handler->genereate_page_quick();
