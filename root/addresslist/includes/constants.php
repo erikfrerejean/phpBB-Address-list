@@ -17,4 +17,8 @@ if (!defined('IN_PHPBB'))
 }
 
 // The version
-define ('ADL_VERSION', '0.0.1');
+define ('ADL_VERSION', '0.0.2');
+
+// Tables
+define ('ADL_ADDRESLIST_TABLE'		, $table_prefix . 'adl_addresslist');
+define ('ADL_ADDRESLIST_DATA_TABLE'	, $table_prefix . 'adl_addresslist_data');

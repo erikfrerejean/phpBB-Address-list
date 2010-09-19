@@ -31,4 +31,36 @@ $versions = array(
 	'0.0.1'	=> array(
 		// No schema
 	),
+	'0.0.2' => array(
+		'table_add' => array(
+			// Create the main Addresses table
+			array(
+				ADL_ADDRESLIST_TABLE, array(
+					'COLUMNS'	=> array(
+						'adress_id' => array('UINT', NULL, 'auto_increment'),
+						'user_id'   => array('UINT', 0),
+					),
+					'PRIMARY_KEY'	=> 'adress_id',
+					'KEYS'			=> array(
+						'address_user_id'	=> array('INDEX', 'user_id'),
+					),
+				),
+			),
+			
+			// Create the Address list data table
+			array(
+				ADL_ADDRESLIST_DATA_TABLE, array(
+					'COLUMNS'	=> array(
+						'address_id'    => array('UINT', 0),
+						'addresstype'	=> array('USINT', 0),
+						'addressvalue'	=> array('VCHAR', 0),
+					),
+					'KEYS'			=> array(
+						'address_id'	=> array('INDEX', 'address_id'),
+						'addresstype'	=> array('INDEX', 'addresstype'),
+					),
+				),
+			),
+		),
+	),
 );
