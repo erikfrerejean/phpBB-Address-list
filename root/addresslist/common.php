@@ -20,9 +20,6 @@ if (!defined('IN_PHPBB'))
 $phpbb_root_path = PHPBB_ROOT_PATH;
 $phpEx = PHP_EXT;
 
-// Include all non-common constants
-require ADL_ROOT_PATH . 'includes/constants.' . PHP_EXT;
-
 // Include the main core classes
 require ADL_ROOT_PATH . 'includes/core/addresslist.' . PHP_EXT;
 require ADL_ROOT_PATH . 'includes/core/adl_phpbb.' . PHP_EXT;
@@ -33,6 +30,9 @@ if (!file_exists(PHPBB_ROOT_PATH . 'common.' . PHP_EXT))
 	die('<p>No phpBB installation found. Verify that you\'ve installed the Address List correctly.</p>');
 }
 require PHPBB_ROOT_PATH . 'common.' . PHP_EXT;
+
+// Include all non-common constants
+require ADL_ROOT_PATH . 'includes/constants.' . PHP_EXT;
 
 // Initialise phpBB
 adl_phpbb::initialise();
